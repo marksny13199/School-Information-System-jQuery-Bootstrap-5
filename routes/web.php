@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LandingPageController;
@@ -16,3 +17,4 @@ use App\Http\Controllers\LandingPageController;
 */
 
 Route::get('/', [LandingPageController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);

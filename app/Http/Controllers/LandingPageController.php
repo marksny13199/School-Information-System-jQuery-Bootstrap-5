@@ -25,10 +25,13 @@ class LandingPageController extends Controller
             'pass' => $validatedData['password']
         ])->first();
 
-        return response()->json([
-            'is_success' => ($query ?? false) ? true : false,
-            'message' => 'db transaction success',
-            'data' => $query,
-        ], 200);
+        if(!empty($query)){
+            $this->setSession($validatedData);
+            return redirect('/dashboard');
+        } else {
+            return response()->json([
+                'is_success' => false,
+            ], 404);
+        }
     }
 }

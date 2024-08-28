@@ -14,18 +14,30 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
      /**
-     * Load a specific view with the provided data.
+     * Load a specific view with the provided data or redirect based on session status.
      *
-     * @param string $page
      * @param array $data
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function viewPage(string $page = 'landing_page.login', array $data = []): View
+
+    public function viewPage(array $data = []): View|\Illuminate\Http\RedirectResponse
     {
-        if (Session::has('sess_id')) {
-            return view($page, $data);
+        if (Session::has('session_data')) {
+            if(empty($data)){
+                return redirect('/dashboard');
+            } else {
+                return view('page_structure.layout', $data);
+            }
         } else {
             return view('landing_page.login');
         }
+    }
+
+    public function setSession($sess_data): void
+    {
+        session([ 
+            'session_data' => $sess_data
+        ]);
+        Session::save();
     }
 }

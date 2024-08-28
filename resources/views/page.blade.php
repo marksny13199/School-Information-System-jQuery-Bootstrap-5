@@ -1,0 +1,5 @@
+@include('page_structure.header', $data)
+@include('page_structure.sidebar')
+@include('page_structure.navbar')
+@include($content, $data)
+@include('page_structure.footer', $data)

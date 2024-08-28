@@ -58,6 +58,10 @@ function checkCredetials(){
                         $('.err-msg').text('*' + error.responseJSON.message);
                         $('.err-msg-div').removeClass('invisible');
                     break;
+                    case 404:
+                        $('.err-msg').text('*Incorrect username/password.');
+                        $('.err-msg-div').removeClass('invisible');
+                    break;
                     case 500:
                         $('.err-msg').text('*Internal server error.');
                         $('.err-msg-div').removeClass('invisible');
